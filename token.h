@@ -17,7 +17,7 @@ typedef enum {
     /* Keywords */
     TOKEN_ARRAY,
     TOKEN_AUTO, 
-    TOKEN_CARRAY,
+    TOKEN_CARRY,
     TOKEN_ELSE,
     TOKEN_FALSE,
     TOKEN_FLOAT,
