@@ -77,6 +77,12 @@ NOT SURE   { return TOKEN_FUNCTION_CALL; }
 \#         { return TOKEN_UNARY_ARRAY_LEN; }
 
 /* Error */
+
+{DIGIT}+\.{DIGIT}+[fF] { return TOKEN_FLOAT_LITERAL; }
+{DIGIT}+\.{DIGIT}+   { return TOKEN_DOUBLE_LITERAL; }
+{DIGIT}+             { return TOKEN_INTEGER_LITERAL; }
+{LETTER}{LETTER}*    { return TOKEN_IDENT; }
+
 .          { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }

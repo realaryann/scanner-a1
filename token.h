@@ -22,7 +22,7 @@ typedef enum {
     /* Keywords */
     TOKEN_ARRAY,
     TOKEN_AUTO, 
-    TOKEN_CARRAY,
+    TOKEN_CARRY,
     TOKEN_ELSE,
     TOKEN_FALSE,
     TOKEN_FLOAT,
@@ -48,6 +48,9 @@ typedef enum {
     TOKEN_SINGLE_QUOTE,
     TOKEN_DOUBLE_QUOTE,
     TOKEN_HEXADECIMAL,
+    TOKEN_INTEGER_LITERAL,
+    TOKEN_FLOAT_LITERAL,
+    TOKEN_DOUBLE_LITERAL,
 
     /* Expressions */
     TOKEN_L_PAREN,
