@@ -14,6 +14,11 @@ typedef enum {
     TOKEN_TYPE_INTEGER,
     TOKEN_TYPE_STRING,
 
+    /* Number types */
+    TOKEN_INTEGER,
+    TOKEN_FLOAT,
+    TOKEN_DOUBLE,
+
     /* Keywords */
     TOKEN_ARRAY,
     TOKEN_AUTO, 
