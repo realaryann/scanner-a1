@@ -33,6 +33,9 @@ return     { return TOKEN_RETURN; }
 /* Number types */
 {DIGIT}+   { return TOKEN_INTEGER; }
 ({DIGIT}\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
+
+/* DECIDE ON WHICH WORKS */
+{DIGIT}+\.{DIGIT}+[fF]      { return TOKEN_FLOAT_LITERAL; }
 ({DIGIT}\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
 
 /* Literals */
@@ -76,13 +79,10 @@ NOT SURE   { return TOKEN_FUNCTION_CALL; }
 \-         { return TOKEN_UNARY_NEGATION; }
 \#         { return TOKEN_UNARY_ARRAY_LEN; }
 
-/* Error */
-
-{DIGIT}+\.{DIGIT}+[fF] { return TOKEN_FLOAT_LITERAL; }
-{DIGIT}+\.{DIGIT}+   { return TOKEN_DOUBLE_LITERAL; }
-{DIGIT}+             { return TOKEN_INTEGER_LITERAL; }
+/* Identifier */
 {LETTER}{LETTER}*    { return TOKEN_IDENT; }
 
+/* Error */
 .          { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }
