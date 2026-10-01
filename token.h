@@ -7,23 +7,25 @@ typedef enum {
     /* Identifier */
     TOKEN_IDENT,
 
+    /* Types */
+    TOKEN_TYPE_CHAR,
+    TOKEN_TYPE_DOUBLE,
+    TOKEN_TYPE_BOOLEAN,
+    TOKEN_TYPE_INTEGER,
+    TOKEN_TYPE_STRING,
+
     /* Keywords */
     TOKEN_ARRAY,
     TOKEN_AUTO, 
-    TOKEN_BOOLEAN 
     TOKEN_CARRAY,
-    TOKEN_CHAR,
     TOKEN_ELSE,
     TOKEN_FALSE,
     TOKEN_FLOAT,
-    TOKEN_DOUBLE,
     TOKEN_FOR,
     TOKEN_FUNCTION,
     TOKEN_IF,
-    TOKEN_INTEGER,
     TOKEN_PRINT,
     TOKEN_RETURN,
-    TOKEN_STRING,
     TOKEN_TRUE,
     TOKEN_VOID,
     TOKEN_WHILE,
