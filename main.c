@@ -5,11 +5,15 @@ extern FILE *yyin;
 extern int yylex();
 extern char *yytext;
 
-int main()
+int main(int argc, char *argv[])
 {
-	yyin = fopen("program.bminor","r");
+	if (argc != 2) {
+		printf("No file in command line arg\n");
+		return 1;
+	}
+	yyin = fopen(argv[1],"r");
 	if(!yyin) {
-		printf("could not open program.c!\n");
+		printf("Could not open %s!\n", argv[1]);
 		return 1;
 	}
 
