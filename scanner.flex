@@ -6,18 +6,13 @@ LETTER [a-zA-Z]
 %%
 (" "|\t|\n)  /* skip whitespace */
 
-/* Types */
 char       { return TOKEN_TYPE_CHAR; }
 boolean    { return TOKEN_TYPE_BOOLEAN; }
 string     { return TOKEN_TYPE_STRING; }
 integer    { return TOKEN_TYPE_INTEGER; }
 double     { return TOKEN_TYPE_DOUBLE; }
-
-/* Boolean types */
 true       { return TOKEN_TRUE; }
 false      { return TOKEN_FALSE; }
-
-/* Keywords */
 array      { return TOKEN_ARRAY; }
 carray     { return TOKEN_CARRAY; }
 float      { return TOKEN_FLOAT; }
@@ -29,16 +24,9 @@ else       { return TOKEN_ELSE; }
 function   { return TOKEN_FUNCTION; }
 void       { return TOKEN_VOID; }
 return     { return TOKEN_RETURN; }
-
-/* Number types */
 {DIGIT}+   { return TOKEN_INTEGER; }
 ({DIGIT}\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
-
-/* DECIDE ON WHICH WORKS */
-{DIGIT}+\.{DIGIT}+[fF]      { return TOKEN_FLOAT_LITERAL; }
-({DIGIT}\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
-
-/* Literals */
+({DIGIT}+\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
 \\\a       { return TOKEN_BELL; }
 \\\b       { return TOKEN_BACKSPACE; }
 \\\e       { return TOKEN_ESCAPE; }
@@ -51,9 +39,6 @@ return     { return TOKEN_RETURN; }
 \\\'       { return TOKEN_SINGLE_QUOTE; }
 \\\"       { return TOKEN_DOUBLE_QUOTE; }
 (\\\0\x)(({DIGIT}|[A-F])({DIGIT}|[A-F]))    { return TOKEN_HEXADECIMAL; }
-
-/* Expressions */
-NOT SURE   { return TOKEN_FUNCTION_CALL; }
 \+\+       { return TOKEN_POSTFIX_INCR; }
 \-\-       { return TOKEN_POSTFIX_DECR; }
 \&\&       { return TOKEN_LOGICAL_AND; }
@@ -78,11 +63,7 @@ NOT SURE   { return TOKEN_FUNCTION_CALL; }
 \!         { return TOKEN_LOGICAL_NOT; }
 \-         { return TOKEN_UNARY_NEGATION; }
 \#         { return TOKEN_UNARY_ARRAY_LEN; }
-
-/* Identifier */
 {LETTER}{LETTER}*    { return TOKEN_IDENT; }
-
-/* Error */
 .          { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }
