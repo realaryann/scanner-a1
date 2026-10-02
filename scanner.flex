@@ -3,6 +3,8 @@
 %}
 DIGIT  [0-9]
 LETTER [a-zA-Z]
+ESCAPE  (\\[abefnrtv\\'"])
+HEXESC  (\\0x[A-Fa-f0-9]{1,2})
 %%
 (" "|\t)  /* skip whitespace */
 
@@ -33,6 +35,7 @@ return     { return TOKEN_RETURN; }
 ({DIGIT}+\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
 ({DIGIT}+\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
 \'({LETTER}{0,1})\' { return TOKEN_CHAR; }
+\"([^\"\\\n]|{ESCAPE}|{HEXESC})*\"    { return TOKEN_STRING; }
 \\\a       { return TOKEN_BELL; }
 \\\b       { return TOKEN_BACKSPACE; }
 \\\e       { return TOKEN_ESCAPE; }
