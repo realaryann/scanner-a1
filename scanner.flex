@@ -35,6 +35,8 @@ return     { return TOKEN_RETURN; }
 void       { return TOKEN_VOID; }
 while      { return TOKEN_WHILE; }
 
+{DIGIT}+   { return TOKEN_INTEGER_LITERAL; }
+
       /* DECIDE ON WHICH WORKS */
 {DIGIT}+\.{DIGIT}+[fF]      { return TOKEN_FLOAT_LITERAL; }
 ({DIGIT}\.)({DIGIT}{1,15})  { return TOKEN_FLOAT_LITERAL; }
