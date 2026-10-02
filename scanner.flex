@@ -32,6 +32,7 @@ return     { return TOKEN_RETURN; }
 {DIGIT}+   { return TOKEN_INTEGER; }
 ({DIGIT}+\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
 ({DIGIT}+\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
+\'({LETTER}{0,1})\' { return TOKEN_CHAR; }
 \\\a       { return TOKEN_BELL; }
 \\\b       { return TOKEN_BACKSPACE; }
 \\\e       { return TOKEN_ESCAPE; }
