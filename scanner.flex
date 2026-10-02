@@ -65,9 +65,12 @@ return     { return TOKEN_RETURN; }
 \)         { return TOKEN_R_PAREN; }
 \[         { return TOKEN_L_BRACKET; }
 \]         { return TOKEN_R_BRACKET; }
+\{         { return TOKEN_L_CURLY_BRACKET; }
+\}         { return TOKEN_R_CURLY_BRACKET; }
 \!         { return TOKEN_LOGICAL_NOT; }
 \-         { return TOKEN_UNARY_NEGATION; }
 \#         { return TOKEN_UNARY_ARRAY_LEN; }
+\;         { return TOKEN_SEMICOLON; }
 ({LETTER}|\_)(({LETTER}|{DIGIT}|_){0,254})    { return TOKEN_IDENT; }
 .          { return TOKEN_ERROR; }
 %%
