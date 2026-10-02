@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 		token_t t = yylex();
 		if(t==TOKEN_EOF) break;
 		else if(t==TOKEN_LITERAL_NEWLINE) continue;
+		else if(t==TOKEN_ERROR) printf("UNMATCHED TOKEN at line number: %d | text: %s\n",i,yytext);
 		else printf("line number: %d | token: %d  | text: %s\n",i,t,yytext);
 	}
 }
