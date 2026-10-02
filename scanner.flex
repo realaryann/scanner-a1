@@ -68,7 +68,7 @@ return     { return TOKEN_RETURN; }
 \!         { return TOKEN_LOGICAL_NOT; }
 \-         { return TOKEN_UNARY_NEGATION; }
 \#         { return TOKEN_UNARY_ARRAY_LEN; }
-{LETTER}{LETTER}*    { return TOKEN_IDENT; }
+({LETTER}|\_)(({LETTER}|{DIGIT}|_)*)    { return TOKEN_IDENT; } /* Need to cap size to 255 */
 .          { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }
