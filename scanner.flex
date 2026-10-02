@@ -6,6 +6,9 @@ LETTER [a-zA-Z]
 %%
 (" "|\t|\n)  /* skip whitespace */
 
+(\/\/)(.*) { return TOKEN_CPP_COMMENT; }
+(\/\*)(.*)(\*\/) { return TOKEN_C_COMMENT; }
+
 char       { return TOKEN_TYPE_CHAR; }
 boolean    { return TOKEN_TYPE_BOOLEAN; }
 string     { return TOKEN_TYPE_STRING; }
