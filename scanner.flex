@@ -4,7 +4,9 @@
 DIGIT  [0-9]
 LETTER [a-zA-Z]
 %%
-(" "|\t|\n)  /* skip whitespace */
+(" "|\t)  /* skip whitespace */
+
+(\n)       { return TOKEN_LITERAL_NEWLINE; }    /* Used to track location of tokens */
 
 (\/\/)(.*) { return TOKEN_CPP_COMMENT; }
 (\/\*)(.*)(\*\/) { return TOKEN_C_COMMENT; }

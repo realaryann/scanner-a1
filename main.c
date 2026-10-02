@@ -17,9 +17,10 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	while(1) {
+	for(int i = 1; i; i++) {
 		token_t t = yylex();
 		if(t==TOKEN_EOF) break;
-		printf("token: %d  text: %s\n",t,yytext);
+		else if(t==TOKEN_LITERAL_NEWLINE) continue;
+		else printf("line number: %d | token: %d  | text: %s\n",i,t,yytext);
 	}
 }

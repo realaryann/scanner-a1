@@ -82,6 +82,8 @@ typedef enum {
     TOKEN_LOGICAL_OR,
     TOKEN_ASSIGN,
 
+    /* Newline */
+    TOKEN_LITERAL_NEWLINE,
 
     /* ERROR */
     TOKEN_ERROR
