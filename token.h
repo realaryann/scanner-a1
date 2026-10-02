@@ -18,15 +18,15 @@ typedef enum {
     TOKEN_TYPE_INTEGER,
     TOKEN_TYPE_STRING,
 
-    /* Number types */
+    /* Number types 
     TOKEN_INTEGER,
     TOKEN_FLOAT,
     TOKEN_DOUBLE,
-
+    */
     /* Keywords */
     TOKEN_ARRAY,
     TOKEN_AUTO, 
-    TOKEN_CARRAY,
+    TOKEN_CARRY,
     TOKEN_ELSE,
     TOKEN_FALSE,
     TOKEN_FOR,
@@ -38,7 +38,14 @@ typedef enum {
     TOKEN_VOID,
     TOKEN_WHILE,
 
-    /* Literals */
+    /* Punctuation */
+    TOKEN_COLON,
+    TOKEN_SEMICOLON,
+    TOKEN_COMMA,
+
+    /*
+    // Escape sequences used inside char/string literals.
+    // They are not separate scanner tokens. Should we don't include them in the token enum
     TOKEN_BELL,
     TOKEN_BACKSPACE,
     TOKEN_ESCAPE,
@@ -50,7 +57,10 @@ typedef enum {
     TOKEN_BACKSLASH,
     TOKEN_SINGLE_QUOTE,
     TOKEN_DOUBLE_QUOTE,
-    TOKEN_HEXADECIMAL,
+    TOKEN_HEXADECIMAL,  */
+
+    /* Literals */
+    TOKEN_CHAR_LITERAL,
     TOKEN_INTEGER_LITERAL,
     TOKEN_FLOAT_LITERAL,
     TOKEN_DOUBLE_LITERAL,
@@ -66,7 +76,7 @@ typedef enum {
     TOKEN_POSTFIX_INCR,
     TOKEN_POSTFIX_DECR,
     TOKEN_UNARY_ARRAY_LEN,
-    TOKEN_UNARY_NEGATION,
+    //TOKEN_UNARY_NEGATION,  // don't need it as a seperate scanner rule
     TOKEN_LOGICAL_NOT,
     TOKEN_EXPONENTIATION,
     TOKEN_MULT,
@@ -83,7 +93,6 @@ typedef enum {
     TOKEN_LOGICAL_AND,
     TOKEN_LOGICAL_OR,
     TOKEN_ASSIGN,
-    TOKEN_SEMICOLON,
     TOKEN_CHAR,
 
     /* Newline */

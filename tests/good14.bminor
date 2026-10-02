@@ -12,6 +12,6 @@ intFunction: function integer(integer n) =
 	for(count = 0; count < n+1; count++)
 	{
 		total = total + count;
-	
+	}
 }
 

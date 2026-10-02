@@ -2,16 +2,19 @@
 #include "token.h"
 %}
 DIGIT  [0-9]
-LETTER [a-zA-Z]
 ESCAPE  (\\[abefnrtv\\'"])
 HEXESC  (\\0x[A-Fa-f0-9]{1,2})
+LETTER [a-zA-Z_]
+CHARCLASS [a-zA-Z0-9_]*
+
 %%
-(" "|\t)  /* skip whitespace */
+(" "|\t)    { /* skip whitespace */ }
+
+    /* comments */
+"//".*     { /* skip single-line comment */ }  
+"/*"([^*]|\*+[^*/])*\*+"/"    { /* skip block comment */ }
 
 (\n)       { return TOKEN_LITERAL_NEWLINE; }    /* Used to track location of tokens */
-
-(\/\/)(.*) { return TOKEN_CPP_COMMENT; }
-(\/\*)(.*)(\*\/) { return TOKEN_C_COMMENT; }
 
 char       { return TOKEN_TYPE_CHAR; }
 boolean    { return TOKEN_TYPE_BOOLEAN; }
@@ -21,21 +24,26 @@ double     { return TOKEN_TYPE_DOUBLE; }
 true       { return TOKEN_TRUE; }
 false      { return TOKEN_FALSE; }
 array      { return TOKEN_ARRAY; }
-carray     { return TOKEN_CARRAY; }
-float      { return TOKEN_FLOAT; }
 auto       { return TOKEN_AUTO; }
-while      { return TOKEN_WHILE; }
-for        { return TOKEN_FOR; }
-if         { return TOKEN_IF; }
+carray     { return TOKEN_CARRY; }
 else       { return TOKEN_ELSE; }
+for        { return TOKEN_FOR; }
 function   { return TOKEN_FUNCTION; }
-void       { return TOKEN_VOID; }
+if         { return TOKEN_IF; }
+print      { return TOKEN_PRINT; }  
 return     { return TOKEN_RETURN; }
-{DIGIT}+   { return TOKEN_INTEGER; }
-({DIGIT}+\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
-({DIGIT}+\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
-\'({LETTER}{0,1})\' { return TOKEN_CHAR; }
-\"([^\"\\\n]|{ESCAPE}|{HEXESC})*\"    { return TOKEN_STRING; }
+void       { return TOKEN_VOID; }
+while      { return TOKEN_WHILE; }
+
+      /* DECIDE ON WHICH WORKS */
+{DIGIT}+\.{DIGIT}+[fF]      { return TOKEN_FLOAT_LITERAL; }
+({DIGIT}\.)({DIGIT}{1,15})  { return TOKEN_FLOAT_LITERAL; }
+
+    /* Character and string literals */
+\'({LETTER}{0,1})\'  { return TOKEN_CHAR; }
+\"([^\"\\\n]|{ESCAPE}|{HEXESC})*\"  { return TOKEN_TYPE_STRING; }
+
+     /* Escape sequences - not needed for the scanner
 \\\a       { return TOKEN_BELL; }
 \\\b       { return TOKEN_BACKSPACE; }
 \\\e       { return TOKEN_ESCAPE; }
@@ -47,7 +55,11 @@ return     { return TOKEN_RETURN; }
 \\\\       { return TOKEN_BACKSLASH; }
 \\\'       { return TOKEN_SINGLE_QUOTE; }
 \\\"       { return TOKEN_DOUBLE_QUOTE; }
-(\\\0\x)(({DIGIT}|[A-F]){1,2})    { return TOKEN_HEXADECIMAL; }
+(\\\0\x)(({DIGIT}|[A-F])({DIGIT}|[A-F]))    { return TOKEN_HEXADECIMAL; }
+     */
+
+  /* Expressions */
+
 \+\+       { return TOKEN_POSTFIX_INCR; }
 \-\-       { return TOKEN_POSTFIX_DECR; }
 \&\&       { return TOKEN_LOGICAL_AND; }
@@ -71,11 +83,16 @@ return     { return TOKEN_RETURN; }
 \]         { return TOKEN_R_BRACKET; }
 \{         { return TOKEN_L_CURLY_BRACKET; }
 \}         { return TOKEN_R_CURLY_BRACKET; }
-\!         { return TOKEN_LOGICAL_NOT; }
-\-         { return TOKEN_UNARY_NEGATION; }
-\#         { return TOKEN_UNARY_ARRAY_LEN; }
+\:         { return TOKEN_COLON; }
 \;         { return TOKEN_SEMICOLON; }
+\,         { return TOKEN_COMMA; }
+\!         { return TOKEN_LOGICAL_NOT; }
+\#         { return TOKEN_UNARY_ARRAY_LEN; }
+
+  /* Identifier */
 ({LETTER}|\_)(({LETTER}|{DIGIT}|_){0,254})    { return TOKEN_IDENT; }
+
+   /* Error */
 .          { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }
