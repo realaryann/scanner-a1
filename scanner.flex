@@ -30,7 +30,7 @@ function   { return TOKEN_FUNCTION; }
 void       { return TOKEN_VOID; }
 return     { return TOKEN_RETURN; }
 {DIGIT}+   { return TOKEN_INTEGER; }
-({DIGIT}\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
+({DIGIT}+\.)({DIGIT}{1,8})   { return TOKEN_DOUBLE; }
 ({DIGIT}+\.)({DIGIT}{1,15})  { return TOKEN_FLOAT; }
 \\\a       { return TOKEN_BELL; }
 \\\b       { return TOKEN_BACKSPACE; }
@@ -43,7 +43,7 @@ return     { return TOKEN_RETURN; }
 \\\\       { return TOKEN_BACKSLASH; }
 \\\'       { return TOKEN_SINGLE_QUOTE; }
 \\\"       { return TOKEN_DOUBLE_QUOTE; }
-(\\\0\x)(({DIGIT}|[A-F])({DIGIT}|[A-F]))    { return TOKEN_HEXADECIMAL; }
+(\\\0\x)(({DIGIT}|[A-F]){1,2})    { return TOKEN_HEXADECIMAL; }
 \+\+       { return TOKEN_POSTFIX_INCR; }
 \-\-       { return TOKEN_POSTFIX_DECR; }
 \&\&       { return TOKEN_LOGICAL_AND; }
@@ -68,7 +68,7 @@ return     { return TOKEN_RETURN; }
 \!         { return TOKEN_LOGICAL_NOT; }
 \-         { return TOKEN_UNARY_NEGATION; }
 \#         { return TOKEN_UNARY_ARRAY_LEN; }
-({LETTER}|\_)(({LETTER}|{DIGIT}|_)*)    { return TOKEN_IDENT; } /* Need to cap size to 255 */
+({LETTER}|\_)(({LETTER}|{DIGIT}|_){0,254})    { return TOKEN_IDENT; }
 .          { return TOKEN_ERROR; }
 %%
 int yywrap() { return 1; }
