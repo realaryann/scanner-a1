@@ -7,6 +7,10 @@ typedef enum {
     /* Identifier */
     TOKEN_IDENT,
 
+    /* Comments */
+    TOKEN_C_COMMENT,
+    TOKEN_CPP_COMMENT,
+
     /* Types */
     TOKEN_TYPE_CHAR,
     TOKEN_TYPE_DOUBLE,
