@@ -5,6 +5,75 @@ extern FILE *yyin;
 extern int yylex();
 extern char *yytext;
 
+const char *token_names[] = {
+    "TOKEN_EOF",
+    "TOKEN_IDENT",
+
+    "TOKEN_C_COMMENT",
+    "TOKEN_CPP_COMMENT",
+
+    "TOKEN_TYPE_CHAR",
+    "TOKEN_TYPE_DOUBLE",
+    "TOKEN_TYPE_BOOLEAN",
+    "TOKEN_TYPE_INTEGER",
+    "TOKEN_TYPE_STRING",
+
+    "TOKEN_ARRAY",
+    "TOKEN_AUTO",
+    "TOKEN_CARRY",
+    "TOKEN_ELSE",
+    "TOKEN_FALSE",
+    "TOKEN_FOR",
+    "TOKEN_FUNCTION",
+    "TOKEN_IF",
+    "TOKEN_PRINT",
+    "TOKEN_RETURN",
+    "TOKEN_TRUE",
+    "TOKEN_VOID",
+    "TOKEN_WHILE",
+
+    "TOKEN_COLON",
+    "TOKEN_SEMICOLON",
+    "TOKEN_COMMA",
+
+    "TOKEN_CHAR_LITERAL",
+    "TOKEN_INTEGER_LITERAL",
+    "TOKEN_FLOAT_LITERAL",
+    "TOKEN_DOUBLE_LITERAL",
+
+    "TOKEN_L_PAREN",
+    "TOKEN_R_PAREN",
+    "TOKEN_L_BRACKET",
+    "TOKEN_R_BRACKET",
+    "TOKEN_L_CURLY_BRACKET",
+    "TOKEN_R_CURLY_BRACKET",
+    "TOKEN_FUNCTION_CALL",
+    "TOKEN_POSTFIX_INCR",
+    "TOKEN_POSTFIX_DECR",
+    "TOKEN_UNARY_ARRAY_LEN",
+    "TOKEN_LOGICAL_NOT",
+    "TOKEN_EXPONENTIATION",
+    "TOKEN_MULT",
+    "TOKEN_DIV",
+    "TOKEN_REMAINDER",
+    "TOKEN_ADD",
+    "TOKEN_SUB",
+    "TOKEN_LESS_THAN",
+    "TOKEN_LESS_THAN_EQ",
+    "TOKEN_GREATER_THAN",
+    "TOKEN_GREATER_THAN_EQ",
+    "TOKEN_EQUAL",
+    "TOKEN_NOT_EQUAL",
+    "TOKEN_LOGICAL_AND",
+    "TOKEN_LOGICAL_OR",
+    "TOKEN_ASSIGN",
+    "TOKEN_CHAR",
+
+    "TOKEN_LITERAL_NEWLINE",
+
+    "TOKEN_ERROR"
+};
+
 int main(int argc, char *argv[])
 {
 	if (argc != 2) {
@@ -26,7 +95,7 @@ int main(int argc, char *argv[])
 			i -= 1; // Decrement for newline
 		}
 		else {
-			printf("line number: %d | token: %d  | text: %s\n",i,t,yytext);
+			printf("line number: %d | token: %s  | text: %s\n",i,token_names[t],yytext);
 			i -= 1; // Decrement for newline
 		}
 	}
