@@ -1,2 +1,4 @@
 *.o
 scan
+scanner.c
+tests/
