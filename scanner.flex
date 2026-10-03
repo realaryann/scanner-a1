@@ -2,7 +2,7 @@
 #include "token.h"
 %}
 DIGIT  [0-9]
-ESCAPE  (\\[abefnrtv\\'"])
+ESCAPE  (\\[abcefnrtv06\\'"])
 HEXESC  (\\0x[A-Fa-f0-9]{1,2})
 LETTER [a-zA-Z_]
 CHARCLASS [a-zA-Z0-9_]*
@@ -40,7 +40,7 @@ while      { return TOKEN_WHILE; }
 {DIGIT}+\.({DIGIT}{1,15})  { return TOKEN_FLOAT_LITERAL; }
 
     /* Character and string literals */
-\'({LETTER}{0,1})\'  { return TOKEN_CHAR; }
+\'({ESCAPE}|({LETTER}{0,1}))\'  { return TOKEN_CHAR; }
 \"([^\"\\\n]|{ESCAPE}|{HEXESC})*\"  { return TOKEN_TYPE_STRING; }
 
      /* Escape sequences - not needed for the scanner
