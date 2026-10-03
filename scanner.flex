@@ -2,7 +2,7 @@
 #include "token.h"
 %}
 DIGIT  [0-9]
-ESCAPE  (\\[abcefnrtv06\\'"])
+ESCAPE  (\\[a-zA-Z0-9\\'"])
 HEXESC  (\\0x[A-Fa-f0-9]{1,2})
 LETTER [a-zA-Z_]
 CHARCLASS [a-zA-Z0-9_]*
